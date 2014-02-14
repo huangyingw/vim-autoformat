@@ -15,7 +15,12 @@ endif
 
 if !exists("g:formatprg_java") | let g:formatprg_java = "astyle" | endif
 if !exists("g:formatprg_args_expr_java")  && !exists("g:formatprg_args_java")
-    let g:formatprg_args_expr_java = '"--mode=java -f -t2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+  let s:hostname = substitute(system("hostname"), '\n', '', '')
+  if s:hostname == "huangyingw-uuid.local"
+    let g:formatprg_args_expr_java = '"--mode=java -fxe  -t2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+  else
+    let g:formatprg_args_expr_java = '"--mode=java -fxe  -t2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+  endif
 endif
 
 if !exists("g:formatprg_python") | let g:formatprg_python = "autopep8" | endif
