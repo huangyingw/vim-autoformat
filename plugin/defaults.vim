@@ -19,7 +19,7 @@ if !exists("g:formatprg_args_expr_java")  && !exists("g:formatprg_args_java")
   if s:hostname == "huangyingw-uuid.local"
     let g:formatprg_args_expr_java = '"--mode=java -fxe  -t2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
   else
-    let g:formatprg_args_expr_java = '"--mode=java -fxe  -t2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+    let g:formatprg_args_expr_java = '"--mode=java -fxey  -t2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
   endif
 endif
 
