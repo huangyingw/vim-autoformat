@@ -15,7 +15,7 @@ endif
 
 if !exists("g:formatprg_java") | let g:formatprg_java = "astyle" | endif
 if !exists("g:formatprg_args_expr_java")  && !exists("g:formatprg_args_java")
-    let g:formatprg_args_expr_java = '"--mode=java -f --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+    let g:formatprg_args_expr_java = '"--mode=java -f -t2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
 endif
 
 if !exists("g:formatprg_python") | let g:formatprg_python = "autopep8" | endif
@@ -28,6 +28,7 @@ if !exists("g:formatprg_args_expr_python")  && !exists("g:formatprg_args_python"
       let g:formatprg_args_expr_python = '"/dev/stdin ".(&textwidth ? "--max-line-length=".&textwidth : "")'
     endif
   endif
+endif
 
 if !exists("g:formatprg_xml") | let g:formatprg_xml = "tidy" | endif
 if !exists("g:formatprg_args_expr_xml")  && !exists("g:formatprg_args_xml") 
