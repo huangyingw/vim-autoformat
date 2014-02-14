@@ -15,13 +15,19 @@ endif
 
 if !exists("g:formatprg_java") | let g:formatprg_java = "astyle" | endif
 if !exists("g:formatprg_args_expr_java")  && !exists("g:formatprg_args_java")
-    let g:formatprg_args_expr_java = '"--mode=java --style=ansi -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+    let g:formatprg_args_expr_java = '"--mode=java -f --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
 endif
 
 if !exists("g:formatprg_python") | let g:formatprg_python = "autopep8" | endif
 if !exists("g:formatprg_args_expr_python")  && !exists("g:formatprg_args_python")
-    let g:formatprg_args_expr_python = '"--in-place %:p ".(&textwidth ? "--max-line-length=".&textwidth : "")'
-endif
+  if has("unix")
+    let s:uname = substitute(system("uname"), '\n', '', '')
+    if s:uname == "Darwin"
+      let g:formatprg_args_expr_python = '"--in-place %:p ".(&textwidth ? "--max-line-length=".&textwidth : "")'
+    else
+      let g:formatprg_args_expr_python = '"/dev/stdin ".(&textwidth ? "--max-line-length=".&textwidth : "")'
+    endif
+  endif
 
 if !exists("g:formatprg_xml") | let g:formatprg_xml = "tidy" | endif
 if !exists("g:formatprg_args_expr_xml")  && !exists("g:formatprg_args_xml") 
