@@ -13,6 +13,11 @@ if !exists("g:formatprg_args_expr_cpp")  && !exists("g:formatprg_args_cpp")
   let g:formatprg_args_expr_cpp = '"--mode=c --style=ansi -pcH".(&expandtab ? "s".&shiftwidth : "t")'
 endif
 
+if !exists("g:formatprg_vala") | let g:formatprg_vala = "astyle" | endif
+if !exists("g:formatprg_args_expr_vala")  && !exists("g:formatprg_args_vala")
+  let g:formatprg_args_expr_vala = '"--mode=java -fxejoO -y -t2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+endif
+
 if !exists("g:formatprg_java") | let g:formatprg_java = "astyle" | endif
 if !exists("g:formatprg_args_expr_java")  && !exists("g:formatprg_args_java")
   let s:hostname = substitute(system("hostname"), '\n', '', '')
