@@ -22,7 +22,7 @@ if !exists("g:formatprg_java") | let g:formatprg_java = "astyle" | endif
 if !exists("g:formatprg_args_expr_java")  && !exists("g:formatprg_args_java")
   let s:hostname = substitute(system("hostname"), '\n', '', '')
   if s:hostname == "huangyingw-uuid.local"
-    let g:formatprg_args_expr_java = '"--mode=java -nfxejoO -y  -t2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+    let g:formatprg_args_expr_java = '"--mode=java -nfxejoO -y  --max-code-length=80 -t2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
   else
     let g:formatprg_args_expr_java = '"--mode=java -nfxejoO -y  -t2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
   endif
