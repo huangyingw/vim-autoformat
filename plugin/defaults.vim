@@ -8,6 +8,11 @@ if !exists("g:formatprg_args_expr_c") && !exists("g:formatprg_args_c")
   let g:formatprg_args_expr_c = '"--mode=c --style=ansi -pcH".(&expandtab ? "s".&shiftwidth : "t")'
 endif
 
+if !exists("g:formatprg_json") | let g:formatprg_json = "python" | endif
+if !exists("g:formatprg_args_expr_json")  && !exists("g:formatprg_args_json")
+  let g:formatprg_args_expr_json = '" -m json.tool"'
+endif
+
 if !exists("g:formatprg_cpp") | let g:formatprg_cpp = "astyle" | endif
 if !exists("g:formatprg_args_expr_cpp")  && !exists("g:formatprg_args_cpp")
   let g:formatprg_args_expr_cpp = '"--mode=c --style=ansi -pcH".(&expandtab ? "s".&shiftwidth : "t")'
