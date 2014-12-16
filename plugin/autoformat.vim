@@ -5,6 +5,9 @@ function! s:set_formatprg()
     let s:formatprg_args_var = "g:formatprg_args_".&filetype
     let s:formatprg_args_expr_var = "g:formatprg_args_expr_".&filetype
 
+    if &filetype ==? "sql"
+        return 2
+    endif
     if !exists(s:formatprg_var)
         "No formatprg defined
         if exists("g:autoformat_verbosemode")
@@ -42,9 +45,11 @@ function! s:Autoformat()
     "Save window state
     let winview=winsaveview()
 
-    if <SID>set_formatprg()
+    if <SID>set_formatprg() == 1
         "Autoformat code
         exe "1,$!".&formatprg
+    elseif <SID>set_formatprg() == 2
+        SQLUFormatter
     else
         "Autoindent code
         exe "normal gg=G"
