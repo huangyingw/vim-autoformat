@@ -7,6 +7,8 @@ function! s:set_formatprg()
 
     if &filetype ==? "sql"
         return 2
+    elseif &filetype ==? "py"
+        return 3
     endif
     if !exists(s:formatprg_var)
         "No formatprg defined
@@ -50,6 +52,8 @@ function! s:Autoformat()
         exe "1,$!".&formatprg
     elseif <SID>set_formatprg() == 2
         SQLUFormatter
+    elseif <SID>set_formatprg() == 3
+        PymodeLintAuto
     else
         "Autoindent code
         exe "normal gg=G"
