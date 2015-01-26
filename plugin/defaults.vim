@@ -8,6 +8,16 @@ if !exists("g:formatprg_args_expr_c") && !exists("g:formatprg_args_c")
   let g:formatprg_args_expr_c = '"--mode=c --style=ansi -pcH".(&expandtab ? "s".&shiftwidth : "t")'
 endif
 
+if !exists("g:formatprg_json") | let g:formatprg_json = "python" | endif
+if !exists("g:formatprg_args_expr_json")  && !exists("g:formatprg_args_json")
+  let g:formatprg_args_expr_json = '" -m json.tool"'
+endif
+
+if !exists("g:formatprg_json") | let g:formatprg_json = "python" | endif
+if !exists("g:formatprg_args_expr_json")  && !exists("g:formatprg_args_json")
+  let g:formatprg_args_expr_json = '" -m json.tool"'
+endif
+
 if !exists("g:formatprg_cpp") | let g:formatprg_cpp = "astyle" | endif
 if !exists("g:formatprg_args_expr_cpp")  && !exists("g:formatprg_args_cpp")
   let g:formatprg_args_expr_cpp = '"--mode=c --style=ansi -pcH".(&expandtab ? "s".&shiftwidth : "t")'
@@ -21,8 +31,8 @@ endif
 if !exists("g:formatprg_java") | let g:formatprg_java = "astyle" | endif
 if !exists("g:formatprg_args_expr_java")  && !exists("g:formatprg_args_java")
   let s:hostname = substitute(system("hostname"), '\n', '', '')
-  if s:hostname == "huangyingw-uuid.local"
-    let g:formatprg_args_expr_java = '"--mode=java -nfxejoO -y  --max-code-length=80 -s2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+  if s:hostname == "scl-1yihuang-m.corporate.local"
+    let g:formatprg_args_expr_java = '"--mode=java -nfxejoO -y  -s2 --style=allman -pcH".(&expandtab ? "s".&shiftwidth : "t")'
   else
     let g:formatprg_args_expr_java = '"--mode=java -nfxejoO -y  --max-code-length=150 -s2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
   endif
