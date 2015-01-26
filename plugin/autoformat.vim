@@ -7,7 +7,7 @@ function! s:set_formatprg()
 
     if &filetype ==? "sql"
         return 2
-    elseif &filetype ==? "py"
+    elseif &filetype ==? "python"
         return 3
     endif
     if !exists(s:formatprg_var)
