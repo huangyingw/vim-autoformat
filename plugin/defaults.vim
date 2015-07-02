@@ -32,9 +32,9 @@ if !exists("g:formatprg_java") | let g:formatprg_java = "astyle" | endif
 if !exists("g:formatprg_args_expr_java")  && !exists("g:formatprg_args_java")
   let s:hostname = substitute(system("hostname"), '\n', '', '')
   if s:hostname == "scl-1yihuang-m.corporate.local"
-    let g:formatprg_args_expr_java = '"--mode=java -nfxejoO -y  --max-code-length=150 -s2 --style=allman -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+    let g:formatprg_args_expr_java = '"--mode=java -nfxejoOU -y  --max-code-length=150 -s2 --style=allman -pcH".(&expandtab ? "s".&shiftwidth : "t")'
   else
-    let g:formatprg_args_expr_java = '"--mode=java -nfxejoO -y  --max-code-length=150 -s2 --style=allman -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+    let g:formatprg_args_expr_java = '"--mode=java -nfxejoOU -y  --max-code-length=150 -s2 --style=allman -pcH".(&expandtab ? "s".&shiftwidth : "t")'
   endif
 endif
 
