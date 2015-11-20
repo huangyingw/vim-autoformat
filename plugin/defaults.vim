@@ -20,7 +20,7 @@ endif
 
 if !exists("g:formatprg_cpp") | let g:formatprg_cpp = "astyle" | endif
 if !exists("g:formatprg_args_expr_cpp")  && !exists("g:formatprg_args_cpp")
-  let g:formatprg_args_expr_cpp = '"--mode=c --style=ansi -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+  let g:formatprg_args_expr_cpp = '"--mode=java -nfxejoU -y  --max-code-length=150 -s2 --style=allman -pcH".(&expandtab ? "s".&shiftwidth : "t")' 
 endif
 
 if !exists("g:formatprg_vala") | let g:formatprg_vala = "astyle" | endif
