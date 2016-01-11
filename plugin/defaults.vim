@@ -5,12 +5,7 @@ endif
 
 if !exists("g:formatprg_c") | let g:formatprg_c = "astyle" | endif
 if !exists("g:formatprg_args_expr_c") && !exists("g:formatprg_args_c")
-  let g:formatprg_args_expr_c = '"--mode=c --style=ansi -pcH".(&expandtab ? "s".&shiftwidth : "t")'
-endif
-
-if !exists("g:formatprg_json") | let g:formatprg_json = "python" | endif
-if !exists("g:formatprg_args_expr_json")  && !exists("g:formatprg_args_json")
-  let g:formatprg_args_expr_json = '" -m json.tool"'
+  let g:formatprg_args_expr_c = '"--mode=java -nfxejoU -y  --max-code-length=150 -s2 --style=allman -pcH".(&expandtab ? "s".&shiftwidth : "t")'  
 endif
 
 if !exists("g:formatprg_json") | let g:formatprg_json = "python" | endif
