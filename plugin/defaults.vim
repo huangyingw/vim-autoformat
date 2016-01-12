@@ -63,14 +63,14 @@ endif
 if has("unix")
   let s:uname = substitute(system("uname"), '\n', '', '')
   if s:uname == "Darwin"
-    if !exists("g:formatprg_html") | let g:formatprg_html = "tidy" | endif
-    if !exists("g:formatprg_args_expr_html")  && !exists("g:formatprg_args_html")
-      let g:formatprg_args_expr_html = '"-q --show-errors 0 --show-warnings 0 --force-output --indent auto --indent-spaces ".&shiftwidth." --vertical-space yes --tidy-mark no -asxhtml -wrap ".&textwidth' 
-    endif
-  else
     if !exists("g:formatprg_html") | let g:formatprg_html = "html-beautify" | endif
     if !exists("g:formatprg_args_expr_html")  && !exists("g:formatprg_args_html")
       let g:formatprg_args_expr_html = '"-f - -s ".&shiftwidth'
+    endif
+  else
+    if !exists("g:formatprg_html") | let g:formatprg_html = "tidy" | endif
+    if !exists("g:formatprg_args_expr_html")  && !exists("g:formatprg_args_html")
+      let g:formatprg_args_expr_html = '"-q --show-errors 0 --show-warnings 0 --force-output --indent auto --indent-spaces ".&shiftwidth." --vertical-space yes --tidy-mark no -asxhtml -wrap ".&textwidth' 
     endif
   endif
 endif
