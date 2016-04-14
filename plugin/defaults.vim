@@ -25,11 +25,10 @@ endif
 
 if !exists("g:formatprg_java") | let g:formatprg_java = "astyle" | endif
 if !exists("g:formatprg_args_expr_java")  && !exists("g:formatprg_args_java")
-  let s:hostname = substitute(system("hostname"), '\n', '', '')
-  if s:hostname == "Yings-MacBook-Pro.local"
-    let g:formatprg_args_expr_java = '"--mode=java -nfxejoU -y  --max-code-length=150 -s2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+  if filereadable( $HOME . "/" . '.workrc' )
+    let g:formatprg_args_expr_java = '"--mode=java -nfxejoU --max-code-length=150 -s2 --style=java -pcH".(&expandtab ? "s".&shiftwidth : "t")'
   else
-    let g:formatprg_args_expr_java = '"--mode=java -nfxejoU -y  --max-code-length=150 -s2 --style=allman -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+    let g:formatprg_args_expr_java = '"--mode=java -nfxejoU -y --max-code-length=150 -s2 --style=allman -pcH".(&expandtab ? "s".&shiftwidth : "t")'
   endif
 endif
 
