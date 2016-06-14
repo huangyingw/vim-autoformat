@@ -44,6 +44,7 @@ noremap <expr> gq <SID>set_formatprg() ? 'gq' : 'gq'
 
 "Function for formatting the entire buffer
 function! s:Autoformat()
+  w
   "Save window state
   let winview=winsaveview()
 
