@@ -122,6 +122,8 @@ if !exists('g:formatdef_astyle_java')
     let b:gitRoot = Find_in_parent(".git/config",Windowdir(),$HOME)
     if filereadable(b:gitRoot . "/" . '.astylerc' )
         let g:formatdef_astyle_java = '"astyle --mode=java --options=' . b:gitRoot . "/" . '.astylerc"'
+    else
+        let g:formatdef_astyle_java = '"astyle --mode=java -nfxejoU -y --max-code-length=150 -s2 --style=allman -pcH".(&expandtab ? "s".&shiftwidth : "t")' 
     endif
 endif
 
