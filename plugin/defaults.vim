@@ -119,12 +119,9 @@ endif
 
 " Java
 if !exists('g:formatdef_astyle_java')
-    if filereadable('.astylerc')
-        let g:formatdef_astyle_java = '"astyle --mode=java --options=.astylerc"'
-    elseif filereadable(expand('~/.astylerc')) || exists('$ARTISTIC_STYLE_OPTIONS')
-        let g:formatdef_astyle_java = '"astyle --mode=java"'
-    else
-        let g:formatdef_astyle_java = '"astyle --mode=java --style=java -pcH".(&expandtab ? "s".shiftwidth() : "t")'
+    let b:gitRoot = Find_in_parent(".git/config",Windowdir(),$HOME)
+    if filereadable(b:gitRoot . "/" . '.astylerc' )
+        let g:formatdef_astyle_java = '"astyle --mode=java --options=' . b:gitRoot . "/" . '.astylerc"'
     endif
 endif
 
