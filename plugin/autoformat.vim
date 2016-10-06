@@ -166,6 +166,7 @@ function! s:Fallback()
         " Autoindent code
         exe "normal gg=G"
     endif
+    w
 
 endfunction
 
