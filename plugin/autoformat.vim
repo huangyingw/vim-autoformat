@@ -117,6 +117,7 @@ function! s:TryAllFormatters(...) range
         else
             let success = s:TryFormatterPython()
         endif
+        w
         if success
             if verbose
                 echomsg "Definition in '".formatdef_var."' was successful."
