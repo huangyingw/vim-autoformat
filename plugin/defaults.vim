@@ -119,10 +119,10 @@ endif
 
 " Java
 if !exists('g:formatdef_astyle_java')
-    let b:gitRoot = Find_in_parent(".git/config",Windowdir(),$HOME)
+    let b:astylerc = Find_in_parent(".astylerc",Windowdir(),$HOME) . "/" . '.astylerc'
     let s:hostname = substitute(system("hostname"), '\n', '', '')
-    if filereadable(b:gitRoot . "/" . '.astylerc' )
-        let g:formatdef_astyle_java = '"astyle --mode=java --options=' . b:gitRoot . "/" . '.astylerc"'
+    if filereadable(b:astylerc)
+        let g:formatdef_astyle_java = '"astyle --mode=java --options=' . b:astylerc . '"'
     elseif filereadable(expand('~/loadrc/' . s:hostname . '.astylerc'))
         let g:formatdef_astyle_java = '"astyle --mode=java --options=' . expand('~/loadrc/' . s:hostname . '.astylerc') . '"'
     else
