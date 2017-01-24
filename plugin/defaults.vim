@@ -42,7 +42,7 @@ if !exists('g:formatter_yapf_style')
     let g:formatter_yapf_style = 'pep8'
 endif
 if !exists('g:formatdef_yapf')
-    let g:formatdef_yapf = "'yapf --style=\"{based_on_style:'.g:formatter_yapf_style.',indent_width:'.&shiftwidth.'}\" -l '.a:firstline.'-'.a:lastline"
+    let g:formatdef_yapf = "'yapf --style=\"{based_on_style:'.g:formatter_yapf_style.',indent_width:'.&shiftwidth.',column_limit:'.&textwidth.'}\" -l '.a:firstline.'-'.a:lastline"
 endif
 
 if !exists('g:formatters_python')
@@ -154,11 +154,21 @@ if !exists('g:formatdef_jscs')
     let g:formatdef_jscs = '"jscs -x"'
 endif
 
+if !exists('g:formatdef_standard_javascript')
+    let g:formatdef_standard_javascript = '"standard --fix --stdin"'
+endif
+
+if !exists('g:formatdef_xo_javascript')
+    let g:formatdef_xo_javascript = '"xo --fix --stdin"'
+endif
+
 if !exists('g:formatters_javascript')
     let g:formatters_javascript = [
                 \ 'jsbeautify_javascript',
                 \ 'pyjsbeautify_javascript',
-                \ 'jscs'
+                \ 'jscs',
+                \ 'standard_javascript',
+                \ 'xo_javascript'
                 \ ]
 endif
 
@@ -188,7 +198,7 @@ endif
 
 " HTML
 if !exists('g:formatdef_htmlbeautify')
-    let g:formatdef_htmlbeautify = '"html-beautify -f - -s ".shiftwidth()'
+    let g:formatdef_htmlbeautify = '"html-beautify -f - -".(&expandtab ? "s ".shiftwidth() : "t")'
 endif
 
 if !exists('g:formatdef_tidy_html')
@@ -225,8 +235,14 @@ if !exists('g:formatdef_rbeautify')
     let g:formatdef_rbeautify = '"rbeautify ".(&expandtab ? "-s -c ".shiftwidth() : "-t")'
 endif
 
+if !exists('g:formatdef_rubocop')
+    " The pipe to sed is required to remove some rubocop output that could not
+    " be suppressed.
+    let g:formatdef_rubocop = "'rubocop --auto-correct -o /dev/null -s '.bufname('%').' \| sed -n 2,\\$p'"
+endif
+
 if !exists('g:formatters_ruby')
-    let g:formatters_ruby = ['rbeautify']
+    let g:formatters_ruby = ['rbeautify', 'rubocop']
 endif
 
 

@@ -1,9 +1,10 @@
 # vim-autoformat
 
-Format code with one button press!
-This plugin makes use of external formatprograms to achieve the best results.
-Check the list of formatprograms to see which languages are supported by default.
-You can easily customize or add your own formatprogram.
+Format code with one button press.
+
+This plugin makes use of external formatting programs to achieve the best results.
+Check the list of formatprograms below to see which languages are supported by default.
+You can easily customize these or add your own formatprogram.
 When no formatprogram exists (or no formatprogram is installed) for a certain filetype,
 vim-autoformat falls back by default to indenting, (using vim's auto indent functionality), retabbing and removing trailing whitespace.
 
@@ -133,7 +134,7 @@ Here is a list of formatprograms that are supported by default, and thus will be
   And here the link to its page on the python website: http://pypi.python.org/pypi/autopep8/0.5.2.
 
 * `yapf` for __Python__ (supports formatting ranges).
-  It is readily available through PIP. Most users can install with the terminal command `sudo pip install yapf` or `pip --user install yapf`.
+  It is readily available through PIP. Most users can install with the terminal command `sudo pip install yapf` or `pip  install --user yapf`.
   YAPF has one optional configuration variable to control the formatter style.
   For example:
 
@@ -152,6 +153,14 @@ Here is a list of formatprograms that are supported by default, and thus will be
   Here is the link to the repository: https://github.com/einars/js-beautify.
 
 * `JSCS` for __Javascript__. http://jscs.info/
+
+* `standard` for __Javascript__.
+  It can be installed by running `npm install -g standard` (`nodejs` is required). No more configuration needed.
+  More information about the style guide can be found here: http://standardjs.com/.
+
+* `xo` for __Javascript__.
+  It can be installed by running `npm install -g xo` (`nodejs` is required).
+  Here is the link to the repository: https://github.com/sindresorhus/xo.
 
 * `html-beautify` for __HTML__.
   It is shipped with `js-beautify`, which can be installed by running `npm install -g js-beautify`.
@@ -182,6 +191,10 @@ Here is a list of formatprograms that are supported by default, and thus will be
   Note that compatible `ruby-beautify-0.94.0` or higher version.
   Here is the link to the repository: https://github.com/erniebrodeur/ruby-beautify.
   This beautifier developed and tested with ruby `2.0+`, so you can have weird results with earlier ruby versions.
+
+* `rubocop` for __Ruby__.
+  It can be installed by running `gem install rubocop`.
+  Here is the link to the repository: https://github.com/bbatsov/rubocop
 
 * `gofmt` for __Golang__.
   The default golang formatting program is shipped with the golang distribution. Make sure `gofmt` is in your PATH (if golang is installed properly, it should be).
@@ -303,13 +316,14 @@ contact me by creating an issue in this repository.
 
 ## Change log
 
-### April 2016
-* Add `yapf` as a secondary Python formatter.
+### January 2017
+
+* Add `xo` formatter for JavaScript.
 
 ### March 2016
-* Add more fallback options.
-* Don't use the option formatprg at all, to always have the possible of using the default `gq`
+* Don't use the option formatprg internally anymore, to always have the possible of using the default `gq`
   command.
+* Add more fallback options.
 
 ### June 2015
 
