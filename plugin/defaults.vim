@@ -126,7 +126,7 @@ if !exists('g:formatdef_astyle_java')
     elseif filereadable(expand('~/loadrc/' . s:hostname . '.astylerc'))
         let g:formatdef_astyle_java = '"astyle --mode=java --options=' . expand('~/loadrc/' . s:hostname . '.astylerc') . '"'
     else
-        let g:formatdef_astyle_java = '"astyle --mode=java -nfxejoUys2p --max-code-length=150 --style=allman -pcH".(&expandtab ? "s".&shiftwidth : "t")'
+        let g:formatdef_astyle_java = '"astyle --mode=java -nfxejoUys2pHU --max-code-length=150 --style=allman -pcH".(&expandtab ? "s".&shiftwidth : "t")'
     endif
 endif
 
