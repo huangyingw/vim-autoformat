@@ -26,7 +26,7 @@ if !exists('g:formatdef_autopep8')
     " Autopep8 will not do indentation fixes when a range is specified, so we
     " only pass a range when there is a visual selection that is not the
     " entire file. See #125.
-    let g:formatdef_autopep8 = '"autopep8 -".(g:DoesRangeEqualBuffer(a:firstline, a:lastline) ? " --range ".a:firstline." ".a:lastline : "")." ".(&textwidth ? "--max-line-length=".&textwidth : "")." --select=E20,E22,E224,E226,E227,E228,E231,E241,E242,E27,W291"'
+    let g:formatdef_autopep8 = '"autopep8 -".(g:DoesRangeEqualBuffer(a:firstline, a:lastline) ? " --range ".a:firstline." ".a:lastline : "")." ".(&textwidth ? "--max-line-length=".&textwidth : "")." --select=E20,E22,E224,E226,E227,E228,E231,E241,E242,E27,W291,E301,E304,E306,W391,E303,E271,E272,E275,E221,E222,E225,E251"'
 endif
 
 " There doesn't seem to be a reliable way to detect if are in some kind of visual mode,
@@ -166,48 +166,48 @@ endif
 " corresponding config is found they are used, otherwiese the formatter fails.
 " No windows support at the moment.
 if !exists('g:formatdef_eslint_local')
-	function! g:BuildESLintLocalCmd()
-		let l:path = fnamemodify(expand('%'), ':p')
-		let verbose = &verbose || g:autoformat_verbosemode == 1
-		if has('win32')
-			return "(>&2 echo 'ESLint Local not supported on win32')"
-		endif
-		" find formatter & config file
-		let l:prog = findfile('node_modules/.bin/eslint', l:path.";")
-		let l:cfg = findfile('.eslintrc.js', l:path.";")
-		if empty(l:cfg)
-			let l:cfg = findfile('.eslintrc.yaml', l:path.";")
-		endif
-		if empty(l:cfg)
-			let l:cfg = findfile('.eslintrc.yml', l:path.";")
-		endif
-		if empty(l:cfg)
-			let l:cfg = findfile('.eslintrc.json', l:path.";")
-		endif
-		if empty(l:cfg)
-			let l:cfg = findfile('.eslintrc', l:path.";")
-		endif
-		if (empty(l:cfg) || empty(l:prog))
-			if verbose
-				return "(>&2 echo 'No local ESLint program and/or config found')"
-			endif
-			return 
-		endif
+    function! g:BuildESLintLocalCmd()
+        let l:path = fnamemodify(expand('%'), ':p')
+        let verbose = &verbose || g:autoformat_verbosemode == 1
+        if has('win32')
+            return "(>&2 echo 'ESLint Local not supported on win32')"
+        endif
+        " find formatter & config file
+        let l:prog = findfile('node_modules/.bin/eslint', l:path.";")
+        let l:cfg = findfile('.eslintrc.js', l:path.";")
+        if empty(l:cfg)
+            let l:cfg = findfile('.eslintrc.yaml', l:path.";")
+        endif
+        if empty(l:cfg)
+            let l:cfg = findfile('.eslintrc.yml', l:path.";")
+        endif
+        if empty(l:cfg)
+            let l:cfg = findfile('.eslintrc.json', l:path.";")
+        endif
+        if empty(l:cfg)
+            let l:cfg = findfile('.eslintrc', l:path.";")
+        endif
+        if (empty(l:cfg) || empty(l:prog))
+            if verbose
+                return "(>&2 echo 'No local ESLint program and/or config found')"
+            endif
+            return
+        endif
 
-		" This formatter uses a temporary file as ESLint has not option to print 
-		" the formatted source to stdout without modifieing the file.
-		let l:eslint_js_tmp_file = fnameescape(tempname().".js")
-		let content = getline('1', '$')
-		call writefile(content, l:eslint_js_tmp_file)
-		return l:prog." -c ".l:cfg." --fix ".l:eslint_js_tmp_file." 1> /dev/null; exit_code=$?
-					 \ cat ".l:eslint_js_tmp_file."; rm -f ".l:eslint_js_tmp_file."; exit $exit_code"
-	endfunction
-	let g:formatdef_eslint_local = "g:BuildESLintLocalCmd()"
+        " This formatter uses a temporary file as ESLint has not option to print
+        " the formatted source to stdout without modifieing the file.
+        let l:eslint_js_tmp_file = fnameescape(tempname().".js")
+        let content = getline('1', '$')
+        call writefile(content, l:eslint_js_tmp_file)
+        return l:prog." -c ".l:cfg." --fix ".l:eslint_js_tmp_file." 1> /dev/null; exit_code=$?
+                    \ cat ".l:eslint_js_tmp_file."; rm -f ".l:eslint_js_tmp_file."; exit $exit_code"
+    endfunction
+    let g:formatdef_eslint_local = "g:BuildESLintLocalCmd()"
 endif
 
 if !exists('g:formatters_javascript')
     let g:formatters_javascript = [
-				\ 'eslint_local',
+                \ 'eslint_local',
                 \ 'jsbeautify_javascript',
                 \ 'pyjsbeautify_javascript',
                 \ 'jscs',
