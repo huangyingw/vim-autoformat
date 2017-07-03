@@ -142,12 +142,8 @@ if !exists('g:formatdef_jsbeautify_javascript')
     elseif filereadable(expand('~/.jsbeautifyrc'))
         let g:formatdef_jsbeautify_javascript = '"js-beautify"'
     else
-        let g:formatdef_jsbeautify_javascript = '"js-beautify -X -f - -".(&expandtab ? "s ".shiftwidth() : "t").(&textwidth ? " -w ".&textwidth : "")'
+        let g:formatdef_jsbeautify_javascript = '"js-beautify -X -".(&expandtab ? "s ".shiftwidth() : "t").(&textwidth ? " -w ".&textwidth : "")'
     endif
-endif
-
-if !exists('g:formatdef_pyjsbeautify_javascript')
-    let g:formatdef_pyjsbeautify_javascript = '"js-beautify -X -".(&expandtab ? "s ".shiftwidth() : "t").(&textwidth ? " -w ".&textwidth : "")." -"'
 endif
 
 if !exists('g:formatdef_jscs')
@@ -209,7 +205,6 @@ if !exists('g:formatters_javascript')
     let g:formatters_javascript = [
                 \ 'eslint_local',
                 \ 'jsbeautify_javascript',
-                \ 'pyjsbeautify_javascript',
                 \ 'jscs',
                 \ 'standard_javascript',
                 \ 'xo_javascript'
@@ -223,18 +218,14 @@ if !exists('g:formatdef_jsbeautify_json')
     elseif filereadable(expand('~/.jsbeautifyrc'))
         let g:formatdef_jsbeautify_json = '"js-beautify"'
     else
-        let g:formatdef_jsbeautify_json = '"js-beautify -f - -".(&expandtab ? "s ".shiftwidth() : "t")'
+        let g:formatdef_jsbeautify_json = '"js-beautify -".(&expandtab ? "s ".shiftwidth() : "t")'
     endif
 endif
 
-if !exists('g:formatdef_pyjsbeautify_json')
-    let g:formatdef_pyjsbeautify_json = '"js-beautify -".(&expandtab ? "s ".shiftwidth() : "t")." -"'
-endif
 
 if !exists('g:formatters_json')
     let g:formatters_json = [
                 \ 'jsbeautify_json',
-                \ 'pyjsbeautify_json',
                 \ ]
 endif
 
