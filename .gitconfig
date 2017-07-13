@@ -2,5 +2,7 @@
     url = git@github.com:Chiel92/vim-autoformat.git
     fetch = +refs/heads/*:refs/remotes/Chiel92/*
 [push]
-    remote = BareReps
     remote = origin
+[gsync]
+    remote = Chiel92
+    branch = master
