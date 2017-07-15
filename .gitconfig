@@ -1,8 +1,12 @@
 [remote "Chiel92"]
     url = git@github.com:Chiel92/vim-autoformat.git
     fetch = +refs/heads/*:refs/remotes/Chiel92/*
+[remote "github"]
+    url = git@github.com:huangyingw/vim-autoformat.git
+    fetch = +refs/heads/*:refs/remotes/github/*
 [push]
     remote = origin
+    remote = github
 [gsync]
     remote = Chiel92
     branch = master
