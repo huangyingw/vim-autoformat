@@ -135,7 +135,10 @@ Here is a list of formatprograms that are supported by default, and thus will be
   And here the link to its page on the python website: http://pypi.python.org/pypi/autopep8/0.5.2.
 
 * `yapf` for __Python__ (supports formatting ranges).
-  It is readily available through PIP. Most users can install with the terminal command `sudo pip install yapf` or `pip  install --user yapf`.
+  Vim-autoformat checks whether there exists a `.style.yapf` or a `setup.cfg` file up in the current directory's ancestry.
+  Based on that it either uses that file or tries to match vim options as much as possible.
+  It is readily available through PIP.
+  Most users can install with the terminal command `sudo pip install yapf` or `pip  install --user yapf`.
   YAPF has one optional configuration variable to control the formatter style.
   For example:
 
@@ -159,11 +162,11 @@ Here is a list of formatprograms that are supported by default, and thus will be
   It can be installed by running `npm install -g standard` (`nodejs` is required). No more configuration needed.
   More information about the style guide can be found here: http://standardjs.com/.
 
-* `ESlint (local)` for __Javascript__. http://eslint.org/
-  It can be installed by running `npm install eslint`. The linter is then installed locally at ```node_modules/.bin/eslint```
-  When running formatter vim will walk up from the current file to search for such local installation and a
-  ESLint configuration file (either .eslintrc or eslintrc.json). When both are found eslint is executed with the --fix argument.
-  Currently only working on *nix like OS (Linux, MacOS etc.) requires OS to provide sh like shell syntax
+* `ESlint` for __Javascript__. http://eslint.org/
+  It can be installed by running `npm install eslint` for a local project or by running `npm install -g eslint` for global use. The linter is then installed locally at `$YOUR_PROJECT/node_modules/.bin/eslint` or globally at `~/.npm-global/bin/eslint`.
+  When running the formatter, vim will walk up from the current file to search for such local installation and a ESLint configuration file (either `.eslintrc.js` or `eslintrc.json`). When the local version is missing it will fallback to the global version in your home directory. When both requirements are found eslint is executed with the `--fix` argument.
+  Note that the formatter's name is still `eslint_local` for legacy reasons even though it already supports global `eslint`.
+  Currently only working on \*nix like OS (Linux, MacOS etc.) as it requires the OS to provide sh like shell syntax.
 
 * `xo` for __Javascript__.
   It can be installed by running `npm install -g xo` (`nodejs` is required).
@@ -328,16 +331,12 @@ If you have any suggestions on this plugin or on this readme, if you have some n
 formatter definition that can be added to the defaults, or if you experience problems, please
 contact me by creating an issue in this repository.
 
-## Change log
-
-### January 2017
-
-* Add `xo` formatter for JavaScript.
+## Major Change Log
 
 ### March 2016
-* Don't use the option formatprg internally anymore, to always have the possible of using the default `gq`
+* We don't use the option formatprg internally anymore, to always have the possible of using the default `gq`
   command.
-* Add more fallback options.
+* More fallback options have been added.
 
 ### June 2015
 
@@ -363,8 +362,6 @@ contact me by creating an issue in this repository.
 
 ### March 16 2013
 
-The `dynamic_indent_width` branch has been merged into the master branch.
-
 * The options `expandtab`, `shiftwidth`, `tabstop` and `softtabstop` are not overwritten anymore.
 * This obsoletes `g:autoformat_no_default_shiftwidth`
 * `g:formatprg_args_expr_<filetype>` is introduced.
@@ -378,8 +375,6 @@ The `dynamic_indent_width` branch has been merged into the master branch.
 * When no formatter is installed or defined, vim will now auto-indent the file instead. This uses the indentfile for that specific filetype.
 
 ### March 9 2013
-
-The `custom_config` branch has been merged into the master branch.
 
 * Customization of formatprograms can be done easily now, as explained in the readme.
 * I set the default tabwidth to 4 for all formatprograms as well as for vim itself.

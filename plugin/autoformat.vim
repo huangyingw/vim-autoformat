@@ -1,10 +1,5 @@
 " Function for finding the formatters for this filetype
 " Result is stored in b:formatters
-
-if !exists('g:autoformat_autoindent')
-    let g:autoformat_autoindent = 1
-endif
-
 function! s:find_formatters(...)
     " Detect verbosity
     let verbose = &verbose || g:autoformat_verbosemode == 1
@@ -233,7 +228,8 @@ else:
     for eol in possible_eols:
         lines = [splitline for line in lines for splitline in line.split(eol)]
 
-    vim.current.buffer[:] = lines
+    if vim.current.buffer[:] != lines:
+        vim.current.buffer[:] = lines
 EOF
 
     return 0
@@ -292,7 +288,8 @@ else:
         for eol in possible_eols:
             lines = [splitline for line in lines for splitline in line.split(eol)]
 
-        vim.current.buffer[:] = lines
+        if vim.current.buffer[:] != lines:
+            vim.current.buffer[:] = lines
         vim.command('return 0')
 EOF
 endfunction
@@ -347,6 +344,3 @@ function! s:RemoveTrailingSpaces()
     endtry
 endfunction
 command! RemoveTrailingSpaces call s:RemoveTrailingSpaces()
-
-" Put the uncopyable messages text into the buffer
-command! PutMessages redir @" | messages | redir END | put
