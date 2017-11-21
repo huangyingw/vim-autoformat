@@ -27,7 +27,7 @@ if !exists('g:formatdef_autopep8')
     " Autopep8 will not do indentation fixes when a range is specified, so we
     " only pass a range when there is a visual selection that is not the
     " entire file. See #125.
-    let g:formatdef_autopep8 = '"autopep8 -".(g:DoesRangeEqualBuffer(a:firstline, a:lastline) ? " --range ".a:firstline." ".a:lastline : "")." ".(&textwidth ? "--max-line-length=".&textwidth : "")'
+    let g:formatdef_autopep8 = '"autopep8 -".(g:DoesRangeEqualBuffer(a:firstline, a:lastline) ? " --range ".a:firstline." ".a:lastline : "")." ".(&textwidth ? "--max-line-length=".&textwidth : "")." --select=E20,E22,E224,E226,E227,E228,E231,E241,E242,E27,W291,E301,E304,E306,W391,E303,E271,E272,E275,E221,E222,E225,E251"' 
 endif
 
 " There doesn't seem to be a reliable way to detect if are in some kind of visual mode,
