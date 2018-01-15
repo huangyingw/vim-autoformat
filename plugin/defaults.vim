@@ -266,10 +266,15 @@ if !exists('g:formatdef_jsbeautify_json')
     endif
 endif
 
+if !exists('g:formatdef_fixjson')
+    let g:formatdef_fixjson =  '"fixjson"'
+endif
+
 
 if !exists('g:formatters_json')
     let g:formatters_json = [
                 \ 'jsbeautify_json',
+                \ 'fixjson',
                 \ ]
 endif
 
@@ -440,4 +445,13 @@ endif
 
 if !exists('g:formatters_fortran')
     let g:formatters_fortran = ['fprettify']
+endif
+
+" Elixir
+if !exists('g:formatdef_mix_format')
+    let g:formatdef_mix_format = '"mix format -"'
+endif
+
+if !exists('g:formatters_elixir')
+    let g:formatters_elixir = ['mix_format']
 endif
