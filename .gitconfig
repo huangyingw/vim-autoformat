@@ -10,3 +10,5 @@
 [gsync]
     remote = Chiel92
     branch = master
+[commit]
+	message = n
