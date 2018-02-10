@@ -169,7 +169,9 @@ function! s:Fallback()
             echomsg "Autoindenting..."
         endif
         " Autoindent code
-        exe "normal gg=G"
+        if &filetype != 'python'
+            exe "normal gg=G"
+        endif
     endif
 
 endfunction
