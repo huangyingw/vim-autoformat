@@ -256,7 +256,6 @@ if !exists('g:formatters_javascript')
                 \ 'jsbeautify_javascript',
                 \ 'jscs',
                 \ 'standard_javascript',
-                \ 'prettier_javascript',
                 \ 'xo_javascript',
                 \ ]
 endif
