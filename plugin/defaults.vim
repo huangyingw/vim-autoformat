@@ -126,7 +126,7 @@ endif
 
 " Java
 if !exists('g:formatdef_astyle_java')
-    let b:astylerc = Find_in_parent(".astylerc",Windowdir(),$HOME) . "/" . '.astylerc'
+    let b:astylerc = Find_in_parent(".astylerc", Windowdir(), $HOME) . "/" . '.astylerc'
     let s:hostname = substitute(system("hostname"), '\n', '', '')
     if filereadable(b:astylerc)
         let g:formatdef_astyle_java = '"astyle --mode=java --options=' . b:astylerc . '"'
@@ -176,7 +176,7 @@ if !exists('g:formatdef_xo_javascript')
         let content = getline('1', '$')
         call writefile(content, l:xo_js_tmp_file)
         return "xo --fix ".l:xo_js_tmp_file." 1> /dev/null; exit_code=$?
-                     \ cat ".l:xo_js_tmp_file."; rm -f ".l:xo_js_tmp_file."; exit $exit_code"
+                    \ cat ".l:xo_js_tmp_file."; rm -f ".l:xo_js_tmp_file."; exit $exit_code"
     endfunction
     let g:formatdef_xo_javascript = "g:BuildXOLocalCmd()"
 endif
@@ -206,11 +206,11 @@ if !exists('g:formatdef_eslint_local')
 
         if empty(l:cfg)
             let l:cfg_fallbacks = [
-                \'.eslintrc.yaml',
-                \'.eslintrc.yml',
-                \'.eslintrc.json',
-                \'.eslintrc',
-            \]
+                        \'.eslintrc.yaml',
+                        \'.eslintrc.yml',
+                        \'.eslintrc.json',
+                        \'.eslintrc',
+                        \]
 
             for i in l:cfg_fallbacks
                 let l:tcfg = findfile(i, l:path.";")
@@ -245,7 +245,7 @@ if !exists('g:formatdef_eslint_local')
         let content = getline('1', '$')
         call writefile(content, l:eslint_tmp_file)
         return l:prog." -c ".l:cfg." --fix ".l:eslint_tmp_file." 1> /dev/null; exit_code=$?
-                     \ cat ".l:eslint_tmp_file."; rm -f ".l:eslint_tmp_file."; exit $exit_code"
+                    \ cat ".l:eslint_tmp_file."; rm -f ".l:eslint_tmp_file."; exit $exit_code"
     endfunction
     let g:formatdef_eslint_local = "g:BuildESLintLocalCmd()"
 endif
