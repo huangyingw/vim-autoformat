@@ -8,7 +8,8 @@
     remote = origin
     remote = github
 [gsync]
-    remote = Chiel92/master
+    remote = Chiel92
+    branch = master
 [commit]
     message = n
 [branch "dev"]
