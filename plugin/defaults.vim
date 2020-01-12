@@ -209,6 +209,8 @@ if !exists('g:formatdef_eslint_local')
             if empty(l:prog)
                 let l:prog = findfile('/usr/local/bin/eslint')
             endif
+        else
+            let l:prog = getcwd()."/".l:prog
         endif
 
         "initial
@@ -522,4 +524,17 @@ endif
 
 if !exists('g:formatters_latex')
     let g:formatters_tex = ['latexindent']
+endif
+
+" OCaml
+if !exists('g:formatdef_ocp_indent')
+    let g:formatdef_ocp_indent = '"ocp-indent"'
+endif
+
+if !exists('g:formatdef_ocamlformat')
+    let g:formatdef_ocamlformat = '"ocamlformat --name " . expand("%:p") . " -"'
+endif
+
+if !exists('g:formatters_ocaml')
+    let g:formatters_ocaml = ['ocamlformat', 'ocp_indent']
 endif
