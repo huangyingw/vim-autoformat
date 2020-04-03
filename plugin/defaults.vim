@@ -173,7 +173,7 @@ endif
 
 
 if !exists('g:formatdef_prettier')
-    let g:formatdef_prettier = '"prettier --stdin --stdin-filepath ".expand("%:p").(&textwidth ? " --print-width ".&textwidth : "")." --tab-width=".shiftwidth()'
+    let g:formatdef_prettier = '"prettier --stdin-filepath ".expand("%:p").(&textwidth ? " --print-width ".&textwidth : "")." --tab-width=".shiftwidth()'
 endif
 
 
@@ -399,6 +399,14 @@ if !exists('g:formatters_typescript')
     let g:formatters_typescript = ['tsfmt', 'prettier']
 endif
 
+" Haxe
+if !exists('g:formatdef_haxe_formatter')
+    let g:formatdef_haxe_formatter = "'haxelib run formatter --stdin --source " . fnamemodify("%", ":p:h") . "'"
+endif
+
+if !exists('g:formatters_haxe')
+    let g:formatters_haxe = ["haxe_formatter"]
+endif
 
 " Golang
 " Two definitions are provided for two versions of gofmt.
