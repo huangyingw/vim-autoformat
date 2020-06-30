@@ -1,5 +1,5 @@
 diff --git a/plugin/defaults.vim b/plugin/defaults.vim
-index 4dd2407..9e3dce3 100644
+index fec26b0..b0e02d0 100644
 --- ./plugin/defaults.vim
 +++ ./plugin/defaults.vim
 @@ -136,12 +136,14 @@ endif
