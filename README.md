@@ -90,6 +90,8 @@ Or to have your code be formatted upon saving your file, you could use something
 au BufWrite * :Autoformat
 ```
 
+You can also format the current line only (without having to make a visual selection) by executing `:AutoformatLine`.
+
 To disable the fallback to vim's indent file, retabbing and removing trailing whitespace, set the following variables to 0.
 
 ```vim
@@ -142,6 +144,12 @@ Here is a list of formatprograms that are supported by default, and thus will be
 * `astyle` for __C#__, __C++__, __C__ and __Java__.
   Download it here: http://astyle.sourceforge.net/.
   *Important: version `2.0.5` or higher is required, since only those versions correctly support piping and are stable enough.*
+
+* `dfmt` for __D__.
+  It can be built or downloaded from https://github.com/dlang-community/dfmt.
+  Arch Linux users can install it from the `community` repository with `pacman -S dfmt`.
+  If `dfmt` is not found in `PATH`, Vim-autoformat will try to use `dub run dfmt` command
+  to automatically download and run `dfmt`.
 
 * `autopep8` for __Python__ (supports formatting ranges).
   It's probably in your distro's repository, so you can download it as a regular package.
@@ -200,6 +208,11 @@ Here is a list of formatprograms that are supported by default, and thus will be
   Note that `nodejs` is needed for this to work.
   Here is the link to the repository: https://github.com/einars/js-beautify.
 
+* `stylelint` for __CSS__. https://stylelint.io/
+  It can be installed by running `npm install stylelint stylelint-config-standard` for a local project or by running `npm install -g stylelint stylelint-config-standard` for global use. The linter is then installed locally at `$YOUR_PROJECT/node_modules/.bin/stylelint` or globally at `~/.npm-global/bin/stylelint`.
+  When running the formatter, vim will walk up from the current file to search for such local installation. When the local version is missing it will fallback to the global version in your home directory. When both requirements are found styelint is executed with the `--fix` argument.
+  Currently only working on \*nix like OS (Linux, MacOS etc.) as it requires the OS to provide sh like shell syntax.
+
 * `typescript-formatter` for __Typescript__.
   `typescript-formatter` is a thin wrapper around the TypeScript compiler services.
   It can be installed by running `npm install -g typescript-formatter`.
@@ -234,7 +247,7 @@ Here is a list of formatprograms that are supported by default, and thus will be
   Here is the link to the installation: https://golang.org/doc/install
 
 * `rustfmt` for __Rust__.
-  It can be installed using `cargo`, the Rust package manager. Up-to-date installation instructions are on the project page: https://github.com/nrc/rustfmt/#installation.
+  It can be installed using `cargo`, the Rust package manager. Up-to-date installation instructions are on the project page: https://github.com/rust-lang/rustfmt#quick-start.
 
 * `dartfmt` for __Dart__.
   Part of the Dart SDK (make sure it is on your PATH). See https://www.dartlang.org/tools/dartfmt/ for more info.

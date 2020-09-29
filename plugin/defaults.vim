@@ -128,6 +128,26 @@ if !exists('g:formatters_objc')
 endif
 
 
+" D
+if !exists('g:formatdef_dfmt')
+    if executable('dfmt')
+        let s:dfmt_command = 'dfmt'
+    else
+        let s:dfmt_command = 'dub run -q dfmt --'
+    endif
+
+    let s:configfile_def = '"' . s:dfmt_command . '"'
+    let s:noconfigfile_def = '"' . s:dfmt_command . ' -t " . (&expandtab ? "space" : "tab") . " --indent_size " . shiftwidth() . (&textwidth ? " --soft_max_line_length " . &textwidth : "")'
+
+    let g:formatdef_dfmt = 'g:EditorconfigFileExists() ? (' . s:configfile_def . ') : (' . s:noconfigfile_def . ')'
+    let g:formatters_d = ['dfmt']
+endif
+
+function! g:EditorconfigFileExists()
+    return len(findfile(".editorconfig", expand("%:p:h").";"))
+endfunction
+
+
 " Protobuf
 if !exists('g:formatters_proto')
     let g:formatters_proto = ['clangformat']
@@ -191,6 +211,21 @@ if !exists('g:formatdef_xo_javascript')
     let g:formatdef_xo_javascript = "g:BuildXOLocalCmd()"
 endif
 
+function! s:NodeJsFindPathToExecFile(exec_name)
+    let l:path = fnamemodify(expand('%'), ':p')
+    " find formatter & config file
+    let l:prog = findfile('node_modules/.bin/'.a:exec_name, l:path.";")
+    if empty(l:prog)
+        let l:prog = findfile('~/.npm-global/bin/'.a:exec_name)
+        if empty(l:prog)
+            let l:prog = findfile('/usr/local/bin/'.a:exec_name)
+        endif
+    else
+        let l:prog = getcwd()."/".l:prog
+    endif
+    return l:prog
+endfunction
+
 " Setup ESLint local. Setup is done on formatter execution if ESLint and
 " corresponding config is found they are used, otherwiese the formatter fails.
 " No windows support at the moment.
@@ -219,15 +254,7 @@ if !exists('g:formatdef_eslint_local')
             return "(>&2 echo 'ESLint not supported on win32')"
         endif
         " find formatter & config file
-        let l:prog = findfile('node_modules/.bin/eslint', l:path.";")
-        if empty(l:prog)
-            let l:prog = findfile('~/.npm-global/bin/eslint')
-            if empty(l:prog)
-                let l:prog = findfile('/usr/local/bin/eslint')
-            endif
-        else
-            let l:prog = getcwd()."/".l:prog
-        endif
+        let l:prog = s:NodeJsFindPathToExecFile('eslint')
 
         "initial
         let l:cfg = findfile('.eslintrc.js', l:path.";")
@@ -286,6 +313,15 @@ if !exists('g:formatters_javascript')
                 \ 'standard_javascript',
                 \ 'prettier',
                 \ 'xo_javascript',
+                \ 'stylelint',
+                \ ]
+endif
+
+" Vue
+if !exists('g:formatters_vue')
+    let g:formatters_vue = [
+                \ 'eslint_local',
+                \ 'stylelint',
                 \ ]
 endif
 
@@ -323,7 +359,7 @@ if !exists('g:formatdef_tidy_html')
 endif
 
 if !exists('g:formatters_html')
-    let g:formatters_html = ['htmlbeautify', 'tidy_html']
+    let g:formatters_html = ['htmlbeautify', 'tidy_html', 'stylelint']
 endif
 
 
@@ -368,12 +404,38 @@ endif
 
 
 " CSS
+
+" Setup stylelint. Setup is done on formatter execution
+" if stylelint is found, otherwise the formatter fails.
+" No windows support at the moment.
+if !exists('g:formatdef_stylelint')
+    function! g:BuildStyleLintCmd()
+        let verbose = &verbose || g:autoformat_verbosemode == 1
+        if has('win32')
+            return "(>&2 echo 'stylelint not supported on win32')"
+        endif
+        " find formatter
+        let l:prog = s:NodeJsFindPathToExecFile('stylelint')
+
+        if (empty(l:prog))
+            if verbose
+                return "(>&2 echo 'No local or global stylelint program found')"
+            endif
+            return
+        endif
+
+        return l:prog." --fix --stdin --stdin-filename ".bufname('%')
+    endfunction
+    let g:formatdef_stylelint = "g:BuildStyleLintCmd()"
+endif
+
+
 if !exists('g:formatdef_cssbeautify')
     let g:formatdef_cssbeautify = '"css-beautify -f - -s ".shiftwidth()'
 endif
 
 if !exists('g:formatters_css')
-    let g:formatters_css = ['cssbeautify', 'prettier']
+    let g:formatters_css = ['cssbeautify', 'prettier', 'stylelint']
 endif
 
 " SCSS
@@ -382,12 +444,12 @@ if !exists('g:formatdef_sassconvert')
 endif
 
 if !exists('g:formatters_scss')
-    let g:formatters_scss = ['sassconvert', 'prettier']
+    let g:formatters_scss = ['sassconvert', 'prettier', 'stylelint']
 endif
 
 " Less
 if !exists('g:formatters_less')
-    let g:formatters_less = ['prettier']
+    let g:formatters_less = ['prettier', 'stylelint']
 endif
 
 " Typescript
@@ -489,7 +551,7 @@ if !exists('g:formatdef_remark_markdown')
 endif
 
 if !exists('g:formatters_markdown')
-    let g:formatters_markdown = ['remark_markdown', 'prettier']
+    let g:formatters_markdown = ['remark_markdown', 'prettier', 'stylelint']
 endif
 
 " Graphql
