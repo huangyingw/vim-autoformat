@@ -1,8 +1,8 @@
 diff --git a/plugin/defaults.vim b/plugin/defaults.vim
-index ca8298e..c828462 100644
+index e963a72..0430a09 100644
 --- ./plugin/defaults.vim
 +++ ./plugin/defaults.vim
-@@ -156,12 +156,14 @@ endif
+@@ -160,12 +160,14 @@ endif
  
  " Java
  if !exists('g:formatdef_astyle_java')
