@@ -1,20 +1,12 @@
 diff --git a/plugin/defaults.vim b/plugin/defaults.vim
-index e963a72..0430a09 100644
+index 26c67f9..c934d76 100644
 --- ./plugin/defaults.vim
 +++ ./plugin/defaults.vim
-@@ -160,12 +160,14 @@ endif
- 
- " Java
- if !exists('g:formatdef_astyle_java')
--    if filereadable('.astylerc')
--        let g:formatdef_astyle_java = '"astyle --mode=java --options=.astylerc"'
--    elseif filereadable(expand('~/.astylerc')) || exists('$ARTISTIC_STYLE_OPTIONS')
+@@ -196,9 +196,9 @@ if !exists('g:formatdef_astyle_java')
+     if filereadable(astylerc)
+         let g:formatdef_astyle_java = '"astyle --mode=java --options=' . astylerc . '"'
+     elseif exists('$ARTISTIC_STYLE_OPTIONS')
 -        let g:formatdef_astyle_java = '"astyle --mode=java"'
-+    let b:astylerc = Find_in_parent(".astylerc", Windowdir(), $HOME) . "/" . '.astylerc'
-+    let s:hostname = substitute(system("hostname"), '\n', '', '')
-+    if filereadable(b:astylerc)
-+        let g:formatdef_astyle_java = '"astyle --mode=java --options=' . b:astylerc . '"'
-+    elseif filereadable(expand('~/loadrc/' . s:hostname . '.astylerc'))
 +        let g:formatdef_astyle_java = '"astyle --mode=java --options=' . expand('~/loadrc/' . s:hostname . '.astylerc') . '"'
      else
 -        let g:formatdef_astyle_java = '"astyle --mode=java --style=java -pcH".(&expandtab ? "s".shiftwidth() : "t")'
