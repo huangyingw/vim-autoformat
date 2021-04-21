@@ -302,6 +302,9 @@ Here is a list of formatprograms that are supported by default, and thus will be
 * `shfmt` for __Shell__.
   A shell formatter written in Go supporting POSIX Shell, Bash and mksh that can be installed with `go get -u mvdan.cc/sh/cmd/shfmt`. See https://github.com/mvdan/sh for more info.
 
+* `fish_indent` for __Fish-shell__.
+  Fish shell builtin fish_indent formatter for fish shell script.
+
 * `sqlformat` for __SQL__.
   Install `sqlparse` with `pip`.
 
@@ -327,6 +330,9 @@ Here is a list of formatprograms that are supported by default, and thus will be
 
 * `terraform fmt` for __Terraform__.
   The standard formatter included with Terraform. See https://www.terraform.io/docs/cli/commands/fmt.html for more info.
+
+* `packer fmt` for __Packer__.
+  The standard formatter included with Packer. See https://www.packer.io/docs/commands/fmt for more info.
 
 ## Help, the formatter doesn't work as expected!
 

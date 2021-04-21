@@ -601,6 +601,15 @@ if !exists('g:formatters_sh')
     let g:formatters_sh = ['shfmt']
 endif
 
+" Fish shell
+if !exists('g:formatdef_fish_indent')
+    let g:formatdef_fish_indent = '"fish_indent"'
+endif
+
+if !exists('g:formatters_fish')
+    let g:formatters_fish = ['fish_indent']
+endif
+
 " SQL
 if !exists('g:formatdef_sqlformat')
     let g:formatdef_sqlformat = '"sqlformat --reindent --indent_width ".shiftwidth()." --keywords upper --identifiers lower -"'
@@ -678,4 +687,13 @@ endif
 
 if !exists('g:formatters_terraform')
     let g:formatters_terraform = ['terraform_format']
+endif
+
+" Packer
+if !exists('g:formatdef_packer_format')
+    let g:formatdef_packer_format = '"packer fmt -"'
+endif
+
+if !exists('g:formatters_packer')
+    let g:formatters_packer = ['packer_format']
 endif
