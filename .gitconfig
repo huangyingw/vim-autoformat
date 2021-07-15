@@ -9,7 +9,7 @@
     remote = github
 [gsync]
     remote = Chiel92
-    branch = master
+    target = Chiel92/master
 [commit]
     message = n
 [branch "dev"]
