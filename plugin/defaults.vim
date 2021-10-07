@@ -22,6 +22,15 @@ if !exists('g:autoformat_verbosemode')
 endif
 
 
+" Ada
+if !exists('g:formatdef_gnatpp')
+    let g:formatdef_gnatpp = "'cat > /tmp/adafile; gnatpp --pipe /tmp/adafile; rm -f /tmp/adafile'"
+endif
+
+if !exists('g:formatters_ada')
+    let g:formatters_ada = ['gnatpp']
+endif
+
 " Python
 if !exists('g:formatdef_autopep8')
     " Autopep8 will not do indentation fixes when a range is specified, so we
@@ -514,12 +523,12 @@ if !exists('g:formatters_rust')
 endif
 
 " Dart
-if !exists('g:formatdef_dartfmt')
-    let g:formatdef_dartfmt = '"dartfmt"'
+if !exists('g:formatdef_dart_format')
+    let g:formatdef_dart_format = '"dart format"'
 endif
 
 if !exists('g:formatters_dart')
-    let g:formatters_dart = ['dartfmt']
+    let g:formatters_dart = ['dart_format']
 endif
 
 " Perl
