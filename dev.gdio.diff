@@ -1,8 +1,8 @@
 diff --git a/plugin/defaults.vim b/plugin/defaults.vim
-index be2ebe1..ae36821 100644
+index fa4c440..2cc2207 100644
 --- ./plugin/defaults.vim
 +++ ./plugin/defaults.vim
-@@ -163,9 +163,9 @@ if !exists('g:formatdef_astyle_java')
+@@ -172,9 +172,9 @@ if !exists('g:formatdef_astyle_java')
      if filereadable('.astylerc')
          let g:formatdef_astyle_java = '"astyle --mode=java --options=.astylerc"'
      elseif filereadable(expand('~/.astylerc')) || exists('$ARTISTIC_STYLE_OPTIONS')
