@@ -522,6 +522,15 @@ if !exists('g:formatters_rust')
     let g:formatters_rust = ['rustfmt']
 endif
 
+" Zig
+if !exists('g:formatdef_zigfmt')
+    let g:formatdef_zigfmt = '"zig fmt --stdin"'
+endif
+
+if !exists('g:formatters_zig')
+    let g:formatters_zig = ['zigfmt']
+endif
+
 " Dart
 if !exists('g:formatdef_dart_format')
     let g:formatdef_dart_format = '"dart format"'
