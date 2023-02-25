@@ -1,3 +1,25 @@
+diff --git a/.gitconfig b/.gitconfig
+new file mode 100644
+--- /dev/null
++++ ./.gitconfig
+@@ -0,0 +1,17 @@
++[remote "Chiel92"]
++    url = git@github.com:Chiel92/vim-autoformat.git
++    fetch = +refs/heads/*:refs/remotes/Chiel92/*
++[remote "github"]
++    url = git@github.com:huangyingw/vim-autoformat.git
++    fetch = +refs/heads/*:refs/remotes/github/*
++[push]
++    remote = origin
++    remote = github
++[gsync]
++    remote = Chiel92
++    target = Chiel92/master
++[commit]
++    message = n
++[branch "dev"]
++    remote = origin
++    merge = refs/heads/dev
 diff --git a/plugin/defaults.vim b/plugin/defaults.vim
 --- ./plugin/defaults.vim
 +++ ./plugin/defaults.vim
