@@ -66,7 +66,7 @@ if !exists('g:formatdef_black')
 endif
 
 if !exists('g:formatters_python')
-    let g:formatters_python = ['black']
+    let g:formatters_python = ['autopep8','yapf', 'black']
 endif
 
 
